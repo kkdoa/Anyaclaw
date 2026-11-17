@@ -1,0 +1,85 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "anyaclaw"
+version = "0.1.0"
+description = "Local-first multi-channel AI agent runtime: agent loop, tools, MCP, web UI and chat bots"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Anyaclaw contributors" }]
+keywords = ["ai", "agent", "llm", "tool-calling", "mcp", "chatbot", "openai-compatible"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Communications :: Chat",
+]
+dependencies = ["httpx>=0.27"]
+
+[project.optional-dependencies]
+web = ["fastapi>=0.110", "uvicorn[standard]>=0.29"]
+office = [
+  "python-docx>=1.1",
+  "python-pptx>=0.6.23",
+  "openpyxl>=3.1",
+  "reportlab>=4.0",
+  "pypdf>=4.0",
+]
+mcp = ["mcp>=1.2"]
+dingtalk = ["dingtalk-stream>=0.20"]
+all = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.29",
+  "python-multipart>=0.0.9",
+  "python-docx>=1.1",
+  "python-pptx>=0.6.23",
+  "openpyxl>=3.1",
+  "reportlab>=4.0",
+  "pypdf>=4.0",
+  "mcp>=1.2",
+  "dingtalk-stream>=0.20",
+]
+dev = ["pytest>=8.0,<10", "pytest-asyncio>=0.23,<2", "ruff>=0.17,<1", "mypy>=1.10"]
+
+[project.urls]
+Homepage = "https://github.com/kkdoa/Anyaclaw"
+Issues = "https://github.com/kkdoa/Anyaclaw/issues"
+
+[project.scripts]
+anyaclaw = "anyaclaw.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/anyaclaw"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/anyaclaw", "tests", "docs", "README.md", "LICENSE"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "ASYNC"]
+# ASYNC109: explicit timeout parameters are intentional for tool APIs.
+# ASYNC240: tests intentionally touch the filesystem from async tests.
+ignore = ["E501", "B008", "ASYNC109", "ASYNC240"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+filterwarnings = ["ignore::DeprecationWarning"]
+
+[tool.mypy]
+python_version = "3.11"
+warn_unused_ignores = true
+ignore_missing_imports = true
+files = ["src/anyaclaw"]

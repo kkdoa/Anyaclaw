@@ -1,0 +1,40 @@
+# Secrets & local state
+config.toml
+anyaclaw.toml
+.env
+.anyaclaw/
+*.db
+*.db-wal
+*.db-shm
+
+# Generated artifacts
+files/
+workspace/
+demo-data/
+demo-workspace/
+!tests/fixtures/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+pytest-of-*/
+.coverage
+htmlcov/
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/

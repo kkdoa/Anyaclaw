@@ -1,0 +1,32 @@
+services:
+  anyaclaw:
+    build: .
+    image: anyaclaw:local
+    container_name: anyaclaw
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      ANYACLAW_API_KEY: "${ANYACLAW_API_KEY:?set ANYACLAW_API_KEY in .env}"
+      ANYACLAW_PROVIDER__BASE_URL: "${ANYACLAW_BASE_URL:-https://api.siliconflow.cn/v1}"
+      ANYACLAW_PROVIDER__MODEL: "${ANYACLAW_MODEL:-deepseek-ai/DeepSeek-V3.2}"
+      ANYACLAW_WEB__HOST: "0.0.0.0"
+      ANYACLAW_STORAGE__DATA_DIR: "/data"
+      ANYACLAW_SECURITY__WORKSPACE: "/data/workspace"
+      ANYACLAW_LOG_JSON: "true"
+      # Protect the API when binding outside localhost:
+      # ANYACLAW_SECURITY__WEB_AUTH_TOKEN: "${ANYACLAW_WEB_TOKEN}"
+    volumes:
+      - ./data:/data
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8080/api/health', timeout=3).status == 200 else 1)",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

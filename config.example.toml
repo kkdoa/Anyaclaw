@@ -1,0 +1,72 @@
+# Anyaclaw configuration. Copy to `anyaclaw.toml` and fill in your keys.
+# Every value can also be set via environment variables:
+#   ANYACLAW_PROVIDER__API_KEY=sk-...   (section__key)
+
+[provider]
+api_key = "${ANYACLAW_API_KEY}"
+base_url = "https://api.siliconflow.cn/v1"
+model = "deepseek-ai/DeepSeek-V3.2"
+subagent_model = ""
+cheap_model = ""
+temperature = 0.7
+timeout = 120.0
+max_retries = 3
+thinking = true
+reasoning_effort = ""
+reasoning_budget = 0
+
+[agent]
+max_iterations = 32
+max_tool_calls = 64
+tool_timeout = 300.0
+context_token_budget = 24000
+summarize = true
+identity_file = "identity.md"
+skills_dir = "skills"
+
+[storage]
+data_dir = ".anyaclaw"
+session_backend = "sqlite"
+
+[security]
+workspace = "."
+tool_policy = "confirm"
+auto_approve = false
+shell_enabled = true
+allowed_commands = []
+deny_patterns = ["rm -rf /", "del /f /s /q c:\\", "format c:"]
+
+[web]
+enabled = true
+host = "127.0.0.1"
+port = 8080
+
+[channels.cli]
+enabled = true
+prompt = "you"
+
+[channels.qq]
+enabled = false
+app_id = ""
+app_secret = ""
+
+[channels.feishu]
+enabled = false
+app_id = ""
+app_secret = ""
+
+[channels.dingtalk]
+enabled = false
+client_id = ""
+client_secret = ""
+webhook_url = ""
+webhook_keyword = ""
+
+[tools]
+files = true
+shell = true
+web = true
+memory = true
+subagent = true
+documents = true
+mcp = true
