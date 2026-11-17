@@ -1,6 +1,7 @@
 # Anyaclaw
 
 > A local-first, multi-channel AI agent runtime with a real agent loop, tools, MCP, a web console and chat bots.
+> 一个局部优先，多通道AI代理运行时与一个真实的代理循环，工具，MCP，一个Web控制台和聊天机器人。
 
 [![CI](https://github.com/kkdoa/Anyaclaw/actions/workflows/ci.yml/badge.svg)](https://github.com/kkdoa/Anyaclaw/actions/workflows/ci.yml)
 [![Python](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)
@@ -9,6 +10,8 @@
 Anyaclaw runs on your machine, talks to any OpenAI-compatible model endpoint, and reaches you
 through the terminal, a browser, or a chat bot. The design decisions behind it — and the failure
 modes they address — are documented in [docs/improvements.md](docs/improvements.md).
+
+Anyaclaw运行在您的机器上，与任何兼容OpenAI的模型端点对话，并通过终端、浏览器或聊天机器人到达您的手中。其背后的设计决策-以及它们解决的失效模式-记录在[ docs / improvement.md ] ( docs / improvement.md )中。
 
 **Status:** alpha. The core loop, tools and web console are stable and covered by 100+ tests;
 messaging-channel adapters are beta (see [docs/channels.md](docs/channels.md)).
